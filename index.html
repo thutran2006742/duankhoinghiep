@@ -93,7 +93,7 @@
                     <a href="#register" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-warmOrange hover:bg-warmOrangeHover text-white font-medium text-sm shadow-md transition-all transform hover:-translate-y-0.5">
                         <i class="fa-solid fa-heart mr-2 text-xs"></i> Tham gia ngay
                     </a>
-                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-darkText hover:bg-warmYellowLight focus:outline-none" aria-label="Toggle Navigation">
+                    <button id="mobile-menu-btn" onclick="taoGiaoAnTuAI() "class="md:hidden p-2 rounded-lg text-darkText hover:bg-warmYellowLight focus:outline-none" aria-label="Toggle Navigation">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -919,5 +919,87 @@
             }, 5000);
         }
     </script>
+<!-- BẮT ĐẦU ĐOẠN MÃ KẾT NỐI AI -->
+<script>
+  async function taoGiaoAnTuAI() {
+    // 1. Lấy nội dung câu chuyện người dùng nhập
+    const storyInput = document.getElementById("storyInput") || document.querySelector("textarea");
+    const noiDungKyUc = storyInput ? storyInput.value : "";
+    
+    // Tìm ô hiển thị kết quả
+    let ketQuaBox = document.getElementById("aiResultBox");
+    if (!ketQuaBox) {
+      alert("Đã gửi yêu cầu tới AI! Vui lòng chờ AI phản hồi...");
+    }
+
+    if (!noiDungKyUc.trim()) {
+      alert("Vui lòng nhập câu chuyện hoặc ký ức của người cao tuổi trước khi bấm phân tích!");
+      return;
+    }
+
+    // 2. Kiểm tra và hỏi API Key
+    let apiKey = localStorage.getItem("GEMINI_API_KEY");
+    if (!apiKey) {
+      apiKey = prompt("Vui lòng dán mã Gemini API Key của bạn vào đây (mã dạng AIzaSy...):");
+      if (apiKey) {
+        apiKey = apiKey.trim();
+        localStorage.setItem("GEMINI_API_KEY", apiKey);
+      } else {
+        alert("Bạn cần nhập API Key để tính năng AI hoạt động!");
+        return;
+      }
+    }
+
+    // Thông báo trạng thái đang xử lý
+    if (ketQuaBox) {
+      ketQuaBox.innerHTML = "<div class='p-4 text-amber-700 font-bold animate-pulse'>🤖 AI đang phân tích ký ức và biên soạn giáo án, vui lòng chờ trong giây lát...</div>";
+    }
+
+    // 3. Chuẩn bị nội dung gửi sang Google Gemini
+    const systemPrompt = `Bạn là một chuyên gia sư phạm của dự án "Đại sứ Ký ức". 
+Hãy phân tích câu chuyện ký ức sau đây của người cao tuổi và đóng gói thành một bài học giáo dục trải nghiệm ngắn gọn cho thế hệ trẻ (Gen Z / Học sinh) gồm 4 phần rõ ràng:
+1. Tóm tắt câu chuyện
+2. Bài học cốt lõi / Kỹ năng sống
+3. Câu hỏi gợi mở tư duy
+4. Bài tập thực hành thực tế.
+
+Câu chuyện ký ức: "${noiDungKyUc}"`;
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    // 4. Gửi dữ liệu tới Google AI
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: systemPrompt }] }]
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.candidates && data.candidates[0].content.parts[0].text) {
+        const aiText = data.candidates[0].content.parts[0].text;
+        if (ketQuaBox) {
+          ketQuaBox.innerHTML = `
+            <div class="bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-gray-800 space-y-3 shadow-lg">
+              <h4 class="font-bold text-amber-900 text-lg flex items-center gap-2">✨ Giáo án do AI biên soạn thực tế:</h4>
+              <div class="whitespace-pre-line text-sm leading-relaxed">${aiText}</div>
+            </div>
+          `;
+        } else {
+          alert("Kết quả từ AI:\n\n" + aiText);
+        }
+      } else {
+        alert("Không thể kết nối AI. Vui lòng kiểm tra lại tính chính xác của mã API Key!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Đã xảy ra lỗi kết nối đến hệ thống AI. Vui lòng thử lại!");
+    }
+  }
+</script>
+<!-- KẾT THÚC ĐOẠN MÃ KẾT NỐI AI -->
 </body>
 </html>
