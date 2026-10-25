@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại sứ Ký ức - Gắn kết thế hệ, Lưu giữ di sản, Soi đường tương lai</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Be Vietnam Pro & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        warmKem: '#FAF6F0',
+                        warmOrange: '#E06D53',
+                        warmOrangeHover: '#C8573E',
+                        warmYellow: '#F4B251',
+                        warmYellowLight: '#FEF3E2',
+                        jadeGreen: '#1B6B68',
+                        jadeGreenLight: '#E8F3F2',
+                        darkText: '#2D3748',
+                    },
+                    fontFamily: {
+                        sans: ['Be Vietnam Pro', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(250, 246, 240, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #FAF6F0 0%, #FEF3E2 50%, #E8F3F2 100%);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -10px rgba(224, 109, 83, 0.15);
+        }
+        .custom-shadow-card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        /* Pulse wave animation for audio simulation */
+        @keyframes wave {
+            0%, 100% { height: 8px; }
+            50% { height: 28px; }
+        }
+        .animate-wave-1 { animation: wave 1s infinite ease-in-out; }
+        .animate-wave-2 { animation: wave 1.2s infinite ease-in-out 0.2s; }
+        .animate-wave-3 { animation: wave 0.8s infinite ease-in-out 0.4s; }
+        .animate-wave-4 { animation: wave 1.1s infinite ease-in-out 0.1s; }
+    </style>
+</head>
+<body class="bg-warmKem text-darkText font-sans antialiased selection:bg-warmOrange selection:text-white">
+
+    <!-- 1. HEADER / NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-warmYellow/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-full bg-warmOrange text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-xl tracking-tight text-jadeGreen">Đại sứ Ký ức</span>
+                        <span class="text-[10px] text-warmOrange font-medium uppercase tracking-widest">Memory Ambassadors</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                    <a href="#about" class="text-darkText hover:text-warmOrange transition-colors">Về dự án</a>
+                    <a href="#ai-demo" class="text-darkText hover:text-warmOrange transition-colors flex items-center gap-1">
+                        <span>Trải nghiệm AI</span>
+                        <span class="bg-warmOrange/10 text-warmOrange text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</span>
+                    </a>
+                    <a href="#how-it-works" class="text-darkText hover:text-warmOrange transition-colors">Mô hình</a>
+                    <a href="#services" class="text-darkText hover:text-warmOrange transition-colors">Gói dịch vụ</a>
+                    <a href="#memory-hub" class="text-darkText hover:text-warmOrange transition-colors">Thư viện ký ức</a>
+                </nav>
+
+                <!-- Action CTA & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#register" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-warmOrange hover:bg-warmOrangeHover text-white font-medium text-sm shadow-md transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-heart mr-2 text-xs"></i> Tham gia ngay
+                    </a>
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-darkText hover:bg-warmYellowLight focus:outline-none" aria-label="Toggle Navigation">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-warmYellow/20 bg-warmKem px-4 pt-3 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-base font-medium text-darkText hover:text-warmOrange">Về dự án</a>
+            <a href="#ai-demo" class="block py-2 text-base font-medium text-darkText hover:text-warmOrange">Trải nghiệm AI</a>
+            <a href="#how-it-works" class="block py-2 text-base font-medium text-darkText hover:text-warmOrange">Mô hình hoạt động</a>
+            <a href="#services" class="block py-2 text-base font-medium text-darkText hover:text-warmOrange">Gói dịch vụ / Khóa học</a>
+            <a href="#memory-hub" class="block py-2 text-base font-medium text-darkText hover:text-warmOrange">Thư viện ký ức</a>
+            <a href="#register" class="block text-center py-3 mt-2 rounded-xl bg-warmOrange text-white font-medium">Đăng ký tham gia</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 hero-gradient overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-warmYellow/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -left-24 w-80 h-80 rounded-full bg-jadeGreen/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warmYellowLight border border-warmYellow/30 text-warmOrange font-semibold text-xs mb-6 shadow-sm">
+                        <i class="fa-solid fa-sparkles"></i> Nền tảng Giáo dục & Di sản Giáo dục Kết nối AI
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-darkText leading-tight mb-6">
+                        Gắn kết thế hệ <br class="hidden sm:block"/>
+                        <span class="text-warmOrange">Lưu giữ di sản</span> – <span class="text-jadeGreen">Soi đường tương lai</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Biến ký ức, trải nghiệm sống và bài học vô giá của người cao tuổi thành khóa học sư phạm chuẩn hóa nhờ sức mạnh của AI. Nơi Gen Z tìm thấy bản lĩnh, nơi người già tìm thấy sứ mệnh.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#register" class="px-8 py-4 rounded-full bg-warmOrange hover:bg-warmOrangeHover text-white font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                            <span>Đăng ký Học viên (Gen Z)</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#register" class="px-8 py-4 rounded-full bg-jadeGreen hover:bg-opacity-90 text-white font-semibold shadow-md transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-user-shield text-xs"></i>
+                            <span>Đăng ký làm Đại sứ (Người cao tuổi)</span>
+                        </a>
+                    </div>
+
+                    <!-- Mini metrics -->
+                    <div class="mt-12 pt-8 border-t border-gray-200/60 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <p class="text-2xl font-bold text-jadeGreen">500+</p>
+                            <p class="text-xs text-gray-500 font-medium">Đại sứ Ký ức</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-warmOrange">1,200+</p>
+                            <p class="text-xs text-gray-500 font-medium">Bài học Sư phạm</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-warmYellow">98%</p>
+                            <p class="text-xs text-gray-500 font-medium">Đánh giá xúc động</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Asset -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Main Frame -->
+                        <div class="relative bg-white p-4 sm:p-6 rounded-3xl shadow-2xl border border-warmYellow/20">
+                            <img src="https://images.unsplash.com/photo-1581579438747-1dc8d1e0736f?auto=format&fit=crop&w=800&q=80" alt="Ông cháu trò chuyện" class="w-full h-80 sm:h-96 object-cover rounded-2xl">
+                            
+                            <!-- Floating Card Overlay 1 -->
+                            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3 max-w-xs animate-bounce-slow">
+                                <div class="w-10 h-10 rounded-full bg-warmOrange/10 text-warmOrange flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-microphone text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400 font-medium">Đang ghi âm ký ức...</p>
+                                    <p class="text-xs font-semibold text-darkText">"Kinh nghiệm vượt khủng hoảng năm 1978"</p>
+                                </div>
+                            </div>
+
+                            <!-- Floating Card Overlay 2 -->
+                            <div class="absolute -top-4 -right-4 bg-jadeGreen text-white p-3 rounded-2xl shadow-lg flex items-center gap-2 text-xs font-medium">
+                                <i class="fa-solid fa-wand-magic-sparkles text-warmYellow"></i>
+                                <span>AI chuẩn hóa Sư phạm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-warmOrange font-bold mb-3">Về dự án Đại sứ Ký ức</h2>
+                <p class="text-3xl font-bold text-darkText sm:text-4xl">Cầu nối tri thức truyền đời & Bản lĩnh tương lai</p>
+                <div class="w-16 h-1 bg-warmYellow mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-warmKem/60 border border-warmYellow/20 hover:border-warmOrange/40 transition-all hover:shadow-lg">
+                    <div class="w-14 h-14 rounded-2xl bg-warmOrange/10 text-warmOrange flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkText mb-3">Sứ mệnh Nhân văn</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Tạo niềm vui sống, sự tôn vinh cho thế hệ người cao tuổi (Đại sứ) bằng cách công nhận những vốn sống, trải nghiệm vô giá họ tích lũy cả đời.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-warmKem/60 border border-warmYellow/20 hover:border-warmOrange/40 transition-all hover:shadow-lg">
+                    <div class="w-14 h-14 rounded-2xl bg-jadeGreen/10 text-jadeGreen flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkText mb-3">Công nghệ AI Sinh tạo</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Chuyển hóa các câu chuyện đời thường rời rạc thành khung giáo án, bài học kỹ năng mềm và sách nói tương tác chuẩn phương pháp sư phạm hiện đại.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-warmKem/60 border border-warmYellow/20 hover:border-warmOrange/40 transition-all hover:shadow-lg">
+                    <div class="w-14 h-14 rounded-2xl bg-warmYellow/20 text-warmOrange flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkText mb-3">Đồng hành cùng Gen Z</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Trang bị cho thế hệ trẻ bản lĩnh, kỹ năng ứng biến, tư duy thấu cảm và sự trân trọng lịch sử qua những bài học thực chiến sinh động nhất.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TÍNH NĂNG TRẢI NGHIỆM AI DEMO (Interactive AI Simulator) -->
+    <section id="ai-demo" class="py-20 bg-warmYellowLight/30 border-y border-warmYellow/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-block px-3 py-1 rounded-full bg-warmOrange text-white text-xs font-bold mb-3">TÍNH NĂNG NỔI BẬT</span>
+                <h2 class="text-3xl font-bold text-darkText sm:text-4xl">Trải nghiệm AI "Sư phạm hóa Ký ức"</h2>
+                <p class="text-gray-600 mt-3 text-sm sm:text-base">
+                    Chọn một chủ đề ký ức của Đại sứ để xem công nghệ AI của chúng tôi phân tích và biến hóa thành Bài học Sư phạm & Sách nói tương tác như thế nào.
+                </p>
+            </div>
+
+            <!-- Interactive Demo Box -->
+            <div class="bg-white rounded-3xl shadow-xl border border-warmYellow/30 overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    
+                    <!-- Control Panel (Left 5 Cols) -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 bg-warmKem border-b lg:border-b-0 lg:border-r border-gray-200">
+                        <h3 class="text-lg font-bold text-jadeGreen mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders"></i> Chọn chủ đề ký ức mẫu:
+                        </h3>
+
+                        <!-- Preset Buttons -->
+                        <div class="space-y-3 mb-6" id="preset-container">
+                            <button onclick="selectPreset(0)" class="preset-btn w-full text-left p-3.5 rounded-xl border border-warmOrange bg-warmOrange/5 text-darkText font-medium text-sm transition-all flex items-center justify-between">
+                                <span>1. Kinh nghiệm vượt khủng hoảng tuổi 20</span>
+                                <i class="fa-solid fa-chevron-right text-xs text-warmOrange"></i>
+                            </button>
+                            <button onclick="selectPreset(1)" class="preset-btn w-full text-left p-3.5 rounded-xl border border-gray-200 bg-white text-darkText font-medium text-sm transition-all flex items-center justify-between hover:border-warmOrange/50">
+                                <span>2. Chuyện Hà Nội thời bao cấp & Bài học tiết kiệm</span>
+                                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                            </button>
+                            <button onclick="selectPreset(2)" class="preset-btn w-full text-left p-3.5 rounded-xl border border-gray-200 bg-white text-darkText font-medium text-sm transition-all flex items-center justify-between hover:border-warmOrange/50">
+                                <span>3. Bí quyết gìn giữ hạnh phúc gia đình 50 năm</span>
+                                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                            </button>
+                            <button onclick="selectPreset(3)" class="preset-btn w-full text-left p-3.5 rounded-xl border border-gray-200 bg-white text-darkText font-medium text-sm transition-all flex items-center justify-between hover:border-warmOrange/50">
+                                <span>4. Nghệ thuật thấu cảm trong quản trị nhân tâm</span>
+                                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                            </button>
+                        </div>
+
+                        <!-- Custom Input -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">Hoặc nhập ký ức/chủ đề của riêng bạn:</label>
+                            <textarea id="custom-prompt" rows="3" class="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50" placeholder="Ví dụ: Ký ức về ngày đầu đi làm và bài học vượt qua sự tự tin kém..."></textarea>
+                        </div>
+
+                        <!-- Run Button -->
+                        <button onclick="runAiSimulation()" id="run-btn" class="w-full py-3.5 rounded-xl bg-warmOrange hover:bg-warmOrangeHover text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Chạy mô phỏng xử lý AI
+                        </button>
+                    </div>
+
+                    <!-- AI Processing Pipeline Output (Right 7 Cols) -->
+                    <div class="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <!-- Pipeline Status Bar -->
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-6">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Tiến trình AI xử lý</span>
+                                <span id="pipeline-status" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-jadeGreenLight text-jadeGreen">
+                                    <i class="fa-solid fa-circle-check text-[10px] mr-1"></i> Sẵn sàng
+                                </span>
+                            </div>
+
+                            <!-- Step 1: Raw Voice Input -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 text-xs font-bold text-warmOrange mb-2">
+                                    <span class="w-5 h-5 rounded-full bg-warmOrange text-white flex items-center justify-center text-[10px]">1</span>
+                                    <span>KÝ ỨC THÔ (ĐẠI SỨ KỂ CHUYỆN):</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-warmKem text-sm italic text-gray-700 relative border border-warmYellow/20">
+                                    <i class="fa-solid fa-quote-left text-warmYellow/30 text-2xl absolute top-2 left-2"></i>
+                                    <p id="output-raw" class="relative z-10 pl-4">
+                                        "Năm 1982, khi bác 22 tuổi, thất bại trong lần lập nghiệp đầu tiên khiến bác tay trắng. Cả tháng trời bác chỉ ăn cơm độn ngô, cảm thấy bế tắc hoàn toàn..."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: AI Pedagogical Processing -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 text-xs font-bold text-jadeGreen mb-2">
+                                    <span class="w-5 h-5 rounded-full bg-jadeGreen text-white flex items-center justify-center text-[10px]">2</span>
+                                    <span>AI CHUYỂN HÓA SƯ PHẠM (PEDAGOGICAL LESSON):</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-jadeGreenLight/50 text-sm text-darkText border border-jadeGreen/20">
+                                    <h4 id="output-title" class="font-bold text-jadeGreen text-base mb-2">Khóa học: Quản trị Khủng hoảng & Tâm lý Vượt khó tuổi 20</h4>
+                                    <ul id="output-points" class="space-y-1.5 text-xs sm:text-sm text-gray-700 list-disc pl-5">
+                                        <li><strong>Bài học 1:</strong> Nguyên tắc "Chấp nhận thực tại" - Chìa khóa để dừng hoảng loạn.</li>
+                                        <li><strong>Bài học 2:</strong> Chia nhỏ mục tiêu sinh tồn thành công việc từng ngày.</li>
+                                        <li><strong>Hành động đề xuất:</strong> Viết nhật ký quản trị cảm xúc cho Gen Z.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Interactive Audio Player Demo -->
+                            <div>
+                                <div class="flex items-center gap-2 text-xs font-bold text-warmOrange mb-2">
+                                    <span class="w-5 h-5 rounded-full bg-warmOrange text-white flex items-center justify-center text-[10px]">3</span>
+                                    <span>XUẤT BẢN SÁCH NÓI TƯƠNG TÁC (AUDIOBOOK DEMO):</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-gray-900 text-white flex items-center justify-between gap-4">
+                                    <button id="audio-play-btn" onclick="toggleAudioDemo()" class="w-12 h-12 rounded-full bg-warmOrange hover:bg-warmOrangeHover text-white flex items-center justify-center text-lg flex-shrink-0 transition-all">
+                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                    </button>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between text-xs text-gray-300 mb-1">
+                                            <span id="audio-speaker">Đại sứ: Bác Nguyễn Văn Hùng (72 tuổi)</span>
+                                            <span id="audio-time">00:15 / 02:45</span>
+                                        </div>
+                                        <!-- Waveform visualizer -->
+                                        <div class="h-6 flex items-center gap-1">
+                                            <div class="w-1 bg-warmOrange rounded-full animate-wave-1"></div>
+                                            <div class="w-1 bg-warmYellow rounded-full animate-wave-2"></div>
+                                            <div class="w-1 bg-jadeGreen rounded-full animate-wave-3"></div>
+                                            <div class="w-1 bg-warmOrange rounded-full animate-wave-4"></div>
+                                            <div class="w-1 bg-warmYellow rounded-full animate-wave-2"></div>
+                                            <div class="w-1 bg-jadeGreen rounded-full animate-wave-1"></div>
+                                            <div class="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden ml-2">
+                                                <div id="audio-progress" class="bg-warmOrange h-full w-1/4"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center lg:text-right">
+                            <span class="text-[11px] text-gray-400 font-medium">* Quy trình xử lý tự động hóa hoàn toàn bằng Mô hình AI Gemini tiên tiến.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. MÔ HÌNH HOẠT ĐỘNG (HOW IT WORKS) -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-warmOrange font-bold mb-3">Quy trình chuyên nghiệp</h2>
+                <p class="text-3xl font-bold text-darkText sm:text-4xl">4 Bước biến Ký ức thành Di sản</p>
+                <div class="w-16 h-1 bg-warmOrange mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative p-6 rounded-2xl bg-warmKem/40 border border-warmYellow/20 hover:border-warmOrange transition-all text-center">
+                    <div class="w-12 h-12 rounded-full bg-warmOrange text-white font-bold text-lg flex items-center justify-center mx-auto mb-6 shadow-md">
+                        1
+                    </div>
+                    <h3 class="text-lg font-bold text-darkText mb-2">Thu thập Ký ức</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Phỏng vấn trực tiếp hoặc Đại sứ tự trò chuyện thu âm qua ứng dụng di động thân thiện cho người già.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative p-6 rounded-2xl bg-warmKem/40 border border-warmYellow/20 hover:border-warmOrange transition-all text-center">
+                    <div class="w-12 h-12 rounded-full bg-jadeGreen text-white font-bold text-lg flex items-center justify-center mx-auto mb-6 shadow-md">
+                        2
+                    </div>
+                    <h3 class="text-lg font-bold text-darkText mb-2">Sư phạm hóa bằng AI</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Hệ thống AI bóc tách thông tin, tổng hợp bài học thực tế, biên soạn bài giảng & ngân hàng câu hỏi tình huống.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative p-6 rounded-2xl bg-warmKem/40 border border-warmYellow/20 hover:border-warmOrange transition-all text-center">
+                    <div class="w-12 h-12 rounded-full bg-warmYellow text-white font-bold text-lg flex items-center justify-center mx-auto mb-6 shadow-md">
+                        3
+                    </div>
+                    <h3 class="text-lg font-bold text-darkText mb-2">Ghép cặp Mentoring</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Kết nối học viên Gen Z với Đại sứ tương thích về chủ đề quan tâm (Kỹ năng, Kinh doanh, Cuộc sống).
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative p-6 rounded-2xl bg-warmKem/40 border border-warmYellow/20 hover:border-warmOrange transition-all text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-800 text-white font-bold text-lg flex items-center justify-center mx-auto mb-6 shadow-md">
+                        4
+                    </div>
+                    <h3 class="text-lg font-bold text-darkText mb-2">Xuất bản Di sản</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Đóng gói thành Sách nói, Sách in di sản gia đình và các khóa học tương tác trực tiếp 1-1.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CÁC GÓI DỊCH VỤ / KHÓA HỌC -->
+    <section id="services" class="py-20 bg-warmKem">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-warmOrange font-bold mb-3">Chương trình đào tạo & Số hóa</h2>
+                <p class="text-3xl font-bold text-darkText sm:text-4xl">Gói Dịch Vụ Phù Hợp Cho Mọi Nhu Cầu</p>
+                <div class="w-16 h-1 bg-warmYellow mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Package 1: Gen Z -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-100 custom-shadow-card hover:shadow-xl transition-all flex flex-col justify-between relative">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-warmOrange/10 text-warmOrange text-xs font-bold">DÀNH CHO GEN Z & HỌC SINH</span>
+                        <h3 class="text-xl font-bold text-darkText mt-4 mb-2">Học Kỹ Năng & Lịch Sử 1-1</h3>
+                        <p class="text-xs text-gray-500 mb-6">Trải nghiệm đối thoại thực tế cùng Đại sứ ký ức kết hợp giáo trình AI.</p>
+                        
+                        <div class="text-3xl font-bold text-warmOrange mb-6">
+                            490.000đ <span class="text-xs font-normal text-gray-400">/ khóa 4 buổi</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Ghép cặp Mentor 1-1 hoặc Nhóm 4 bạn</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Truy cập kho Sách nói Ký ức không giới hạn</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Cấp chứng nhận Hoạt động Ngoại khóa/Thấu cảm</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#register" class="w-full py-3 rounded-xl bg-warmKem hover:bg-warmOrange hover:text-white text-darkText font-bold text-center text-sm transition-all border border-warmYellow/30">
+                        Đăng ký Học ngay
+                    </a>
+                </div>
+
+                <!-- Package 2: Family Heritage (FEATURED) -->
+                <div class="bg-white rounded-3xl p-8 border-2 border-warmOrange shadow-2xl transition-all flex flex-col justify-between relative transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-warmOrange text-white text-[11px] uppercase font-bold px-4 py-1 rounded-full tracking-wider">
+                        Phổ biến nhất
+                    </div>
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-warmYellowLight text-warmOrange text-xs font-bold">DÀNH CHO GIA ĐÌNH</span>
+                        <h3 class="text-xl font-bold text-darkText mt-4 mb-2">Số Hóa Di Sản Gia Đình</h3>
+                        <p class="text-xs text-gray-500 mb-6">Ghi lại trọn vẹn cuộc đời, triết lý sống của ông bà thành cuốn sách & file âm thanh vô giá.</p>
+                        
+                        <div class="text-3xl font-bold text-jadeGreen mb-6">
+                            2.990.000đ <span class="text-xs font-normal text-gray-400">/ Trọn gói di sản</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Kíp thu âm & phỏng vấn tận nhà cho ông bà</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>AI biên tập thành Sách In Di Sản cao cấp</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Lưu trữ mã QR Audio kho báu gia đình vĩnh viễn</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#register" class="w-full py-3 rounded-xl bg-warmOrange hover:bg-warmOrangeHover text-white font-bold text-center text-sm transition-all shadow-md">
+                        Đặt gói Cho Ông Bà
+                    </a>
+                </div>
+
+                <!-- Package 3: B2B School & Enterprise -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-100 custom-shadow-card hover:shadow-xl transition-all flex flex-col justify-between relative">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-jadeGreenLight text-jadeGreen text-xs font-bold">TRƯỜNG HỌC & DOANH NGHIỆP</span>
+                        <h3 class="text-xl font-bold text-darkText mt-4 mb-2">Dự Án Giáo Dục B2B</h3>
+                        <p class="text-xs text-gray-500 mb-6">Chương trình trải nghiệm Lịch sử - Kỹ năng sống cho học sinh hoặc văn hóa doanh nghiệp.</p>
+                        
+                        <div class="text-3xl font-bold text-darkText mb-6">
+                            Liên hệ <span class="text-xs font-normal text-gray-400">/ Theo quy mô</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Tổ chức Tọa đàm Ký ức tại trường/doanh nghiệp</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Tích hợp mô đun AI Ký ức vào môn Kỹ năng mềm</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-jadeGreen"></i>
+                                <span>Báo cáo tác động xã hội (ESG)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#register" class="w-full py-3 rounded-xl bg-warmKem hover:bg-jadeGreen hover:text-white text-darkText font-bold text-center text-sm transition-all border border-warmYellow/30">
+                        Hợp tác B2B
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. THƯ VIỆN KÝ ỨC (MEMORY HUB) -->
+    <section id="memory-hub" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest text-warmOrange font-bold mb-3">Kho tàng di sản sống</h2>
+                    <p class="text-3xl font-bold text-darkText sm:text-4xl">Thư Viện Ký Ức Tiêu Biểu</p>
+                </div>
+                <p class="text-sm text-gray-500 max-w-md mt-4 md:mt-0">
+                    Lắng nghe những mẩu chuyện đời thực đã được AI tổng hợp thành bài học được chia sẻ nhiều nhất.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Story Card 1 -->
+                <div class="rounded-2xl overflow-hidden bg-warmKem border border-warmYellow/20 hover:shadow-lg transition-all">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Đại sứ ký ức" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-[11px] font-bold text-warmOrange uppercase tracking-wider">Kỹ năng mềm</span>
+                        <h3 class="text-lg font-bold text-darkText mt-1 mb-2">Bí quyết bình tĩnh trước thất bại tuổi trẻ</h3>
+                        <p class="text-xs text-gray-600 mb-4 line-clamp-2">
+                            Ký ức của Cụ Lê Thị Thảo (81 tuổi, Cựu giáo viên): "Thất bại không phải là đường cùng, nó chỉ là một ngã rẽ bắt buộc bạn phải học thêm kỹ năng mới."
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-headphones mr-1"></i> 1,420 lượt nghe</span>
+                            <button onclick="playDemoAudio('Bí quyết bình tĩnh trước thất bại', 'Cụ Lê Thị Thảo')" class="text-xs font-bold text-jadeGreen hover:text-warmOrange flex items-center gap-1">
+                                <span>Nghe Demo</span> <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Card 2 -->
+                <div class="rounded-2xl overflow-hidden bg-warmKem border border-warmYellow/20 hover:shadow-lg transition-all">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80" alt="Đại sứ ký ức" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-[11px] font-bold text-jadeGreen uppercase tracking-wider">Lịch sử & Đời sống</span>
+                        <h3 class="text-lg font-bold text-darkText mt-1 mb-2">Hà Nội những năm 1980 và bài học kiên trì</h3>
+                        <p class="text-xs text-gray-600 mb-4 line-clamp-2">
+                            Ký ức của Bác Hoàng Quốc Việt (75 tuổi, Kỹ sư nghỉ hưu): "Cuộc sống thiếu thốn thời bao cấp dạy chúng tôi trân trọng từng cơ hội nhỏ nhất."
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-headphones mr-1"></i> 2,150 lượt nghe</span>
+                            <button onclick="playDemoAudio('Hà Nội những năm 1980', 'Bác Hoàng Quốc Việt')" class="text-xs font-bold text-jadeGreen hover:text-warmOrange flex items-center gap-1">
+                                <span>Nghe Demo</span> <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Card 3 -->
+                <div class="rounded-2xl overflow-hidden bg-warmKem border border-warmYellow/20 hover:shadow-lg transition-all">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80" alt="Đại sứ ký ức" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-[11px] font-bold text-warmYellow uppercase tracking-wider">Quản trị & Ứng xử</span>
+                        <h3 class="text-lg font-bold text-darkText mt-1 mb-2">Thấu cảm - Vũ khí mạnh nhất của nhà quản lý</h3>
+                        <p class="text-xs text-gray-600 mb-4 line-clamp-2">
+                            Ký ức của Bác Trần Trọng Nghĩa (70 tuổi, Nguyên Giám đốc Xí nghiệp): "Muốn người khác cống hiến, trước hết phải lắng nghe nỗi niềm của họ."
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-headphones mr-1"></i> 980 lượt nghe</span>
+                            <button onclick="playDemoAudio('Thấu cảm trong quản lý', 'Bác Trần Trọng Nghĩa')" class="text-xs font-bold text-jadeGreen hover:text-warmOrange flex items-center gap-1">
+                                <span>Nghe Demo</span> <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FORM ĐĂNG KÝ -->
+    <section id="register" class="py-20 bg-warmYellowLight/40 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-warmYellow/30">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-darkText sm:text-4xl mb-3">Đăng Ký Tham Gia Dự Án</h2>
+                    <p class="text-sm text-gray-600">Hãy trở thành một phần của hành trình gắn kết thế hệ và lưu giữ di sản.</p>
+                </div>
+
+                <!-- Toggle Role Form -->
+                <div class="flex p-1.5 bg-warmKem rounded-2xl mb-8 max-w-md mx-auto border border-warmYellow/20">
+                    <button id="tab-student" onclick="switchTab('student')" class="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all bg-warmOrange text-white shadow-md">
+                        <i class="fa-solid fa-user-graduate mr-1"></i> Thế hệ trẻ / Phụ huynh
+                    </button>
+                    <button id="tab-ambassador" onclick="switchTab('ambassador')" class="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-600 hover:text-darkText">
+                        <i class="fa-solid fa-heart mr-1"></i> Người cao tuổi (Đại sứ)
+                    </button>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="registration-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-2">Họ và tên *</label>
+                            <input type="text" required class="w-full p-3.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50" placeholder="Nguyễn Văn A">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-2">Số điện thoại / Zalo *</label>
+                            <input type="tel" required class="w-full p-3.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50" placeholder="0901234567">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-2">Email *</label>
+                            <input type="email" required class="w-full p-3.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50" placeholder="example@email.com">
+                        </div>
+                        <div>
+                            <label id="role-specific-label" class="block text-xs font-semibold text-gray-700 mb-2">Nhu cầu đăng ký *</label>
+                            <select id="role-specific-select" class="w-full p-3.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50 bg-white">
+                                <option value="course-11">Đăng ký Khóa học 1-1 / Nhóm nhỏ (Gen Z)</option>
+                                <option value="family-heritage">Đăng ký Gói Số hóa cho Ông bà/Cha mẹ</option>
+                                <option value="b2b">Tư vấn dự án cho Trường học/Doanh nghiệp</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-2">Ghi chú hoặc Chủ đề quan tâm / Muốn chia sẻ</label>
+                        <textarea rows="3" class="w-full p-3.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-warmOrange/50" placeholder="Chia sẻ thêm mong muốn của bạn với dự án..."></textarea>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button type="submit" class="w-full sm:w-auto px-10 py-4 rounded-full bg-warmOrange hover:bg-warmOrangeHover text-white font-bold text-sm shadow-lg transition-all transform hover:-translate-y-0.5">
+                            Gửi Đăng Ký Tư Vấn Trực Tiếp
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Feedback Message -->
+                <div id="form-feedback" class="hidden mt-6 p-4 rounded-xl bg-jadeGreenLight text-jadeGreen text-sm font-medium text-center">
+                    <i class="fa-solid fa-circle-check text-lg mr-2"></i> Cảm ơn bạn đã đăng ký! Ban quản trị Đại sứ Ký ức sẽ liên hệ tư vấn trong vòng 24 giờ.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="bg-gray-900 text-white pt-16 pb-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-warmOrange text-white flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white">Đại sứ Ký ức</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Dự án khởi nghiệp giáo dục & công nghệ xã hội. Lưu giữ ký ức, số hóa di sản và truyền cảm hứng bản lĩnh sống cho thế hệ trẻ Việt Nam.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-warmYellow mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li><a href="#about" class="hover:text-warmOrange transition-colors">Về dự án</a></li>
+                        <li><a href="#ai-demo" class="hover:text-warmOrange transition-colors">Trải nghiệm AI Simulator</a></li>
+                        <li><a href="#how-it-works" class="hover:text-warmOrange transition-colors">Quy trình 4 bước</a></li>
+                        <li><a href="#services" class="hover:text-warmOrange transition-colors">Các gói dịch vụ</a></li>
+                        <li><a href="#memory-hub" class="hover:text-warmOrange transition-colors">Thư viện ký ức di sản</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-warmYellow mb-4">Thông tin liên hệ</h4>
+                    <ul class="space-y-3 text-xs text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-warmOrange mt-0.5"></i>
+                            <span>Văn phòng Dự án: Hà Nội & TP. Hồ Chí Minh</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-warmOrange"></i>
+                            <span>hotro@daisukyuc.vn</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-warmOrange"></i>
+                            <span>1900 xxxx (8:00 - 18:00)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Social & Newsletter -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-warmYellow mb-4">Kết nối với chúng tôi</h4>
+                    <div class="flex gap-3 mb-6">
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-warmOrange text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-warmOrange text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-youtube text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-warmOrange text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-tiktok text-sm"></i>
+                        </a>
+                    </div>
+                    <p class="text-[11px] text-gray-400">Đăng ký nhận thông tin các câu chuyện di sản mới nhất hàng tuần.</p>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
+                <p>&copy; 2026 Dự án Khởi nghiệp "Đại sứ Ký ức". Bản quyền đã được bảo hộ.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile menu toggle logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Preset data for AI Demo
+        const presets = [
+            {
+                raw: '"Năm 1982, khi bác 22 tuổi, thất bại trong lần lập nghiệp đầu tiên khiến bác tay trắng. Cả tháng trời bác chỉ ăn cơm độn ngô, cảm thấy bế tắc hoàn toàn..."',
+                title: "Khóa học: Quản trị Khủng hoảng & Tâm lý Vượt khó tuổi 20",
+                points: [
+                    "<strong>Bài học 1:</strong> Nguyên tắc 'Chấp nhận thực tại' - Chìa khóa để dừng hoảng loạn.",
+                    "<strong>Bài học 2:</strong> Chia nhỏ mục tiêu sinh tồn thành công việc từng ngày.",
+                    "<strong>Hành động đề xuất:</strong> Viết nhật ký quản trị cảm xúc cho Gen Z."
+                ],
+                speaker: "Đại sứ: Bác Nguyễn Văn Hùng (72 tuổi)"
+            },
+            {
+                raw: '"Thời bao cấp ở Hà Nội năm 1978, mua được cân thịt phải xếp hàng từ 4 giờ sáng. Cái quý nhất không phải miếng ăn mà là tình nghĩa xóm giềng chia nhau từng nhúm muối..."',
+                title: "Khóa học: Trí tuệ Tiết kiệm & Văn hóa Ứng xử Cộng đồng",
+                points: [
+                    "<strong>Bài học 1:</strong> Tư duy quản lý nguồn lực giới hạn trong thời kỳ biến động.",
+                    "<strong>Bài học 2:</strong> Sức mạnh của sự kết nối và sẻ chia cộng đồng.",
+                    "<strong>Hành động đề xuất:</strong> Thực hành lối sống tối giản (Minimalism)."
+                ],
+                speaker: "Đại sứ: Cụ Lê Thị Thảo (81 tuổi)"
+            },
+            {
+                raw: '"50 năm vợ chồng bác đi qua bao sóng gió. Vợ chồng bác có một nguyên tắc vàng: Không bao giờ đi ngủ khi chưa giải quyết xong giận dỗi..."',
+                title: "Khóa học: Thấu cảm & Nghệ thuật Giữ gìn Mối quan hệ bền vững",
+                points: [
+                    "<strong>Bài học 1:</strong> Quy tắc lắng nghe không phán xét trong giao tiếp.",
+                    "<strong>Bài học 2:</strong> Cách đặt cái Tôi xuống vì mục tiêu chung lâu dài.",
+                    "<strong>Hành động đề xuất:</strong> Bài tập đóng vai thấu cảm dành cho giới trẻ."
+                ],
+                speaker: "Đại sứ: Bác Phạm Hoàng Nam (76 tuổi)"
+            },
+            {
+                raw: '"Làm quản lý xí nghiệp hơn 30 năm, bác nhận ra người trẻ không bỏ việc vì áp lực công việc, họ bỏ việc vì cảm thấy không được tôn trọng và lắng nghe..."',
+                title: "Khóa học: Quản trị Nhân tâm & Lãnh đạo bằng Sự chân thành",
+                points: [
+                    "<strong>Bài học 1:</strong> Lãnh đạo bằng sự thấu hiểu thay vì mệnh lệnh.",
+                    "<strong>Bài học 2:</strong> Xây dựng niềm tin vững chắc trong đội ngũ.",
+                    "<strong>Hành động đề xuất:</strong> Phương pháp phản hồi tích cực (Feedback 360)."
+                ],
+                speaker: "Đại sứ: Bác Trần Trọng Nghĩa (70 tuổi)"
+            }
+        ];
+
+        let selectedIndex = 0;
+
+        function selectPreset(index) {
+            selectedIndex = index;
+            const buttons = document.querySelectorAll('.preset-btn');
+            buttons.forEach((btn, idx) => {
+                if (idx === index) {
+                    btn.classList.add('border-warmOrange', 'bg-warmOrange/5');
+                    btn.classList.remove('border-gray-200', 'bg-white');
+                    btn.querySelector('i').classList.add('text-warmOrange');
+                    btn.querySelector('i').classList.remove('text-gray-400');
+                } else {
+                    btn.classList.remove('border-warmOrange', 'bg-warmOrange/5');
+                    btn.classList.add('border-gray-200', 'bg-white');
+                    btn.querySelector('i').classList.remove('text-warmOrange');
+                    btn.querySelector('i').classList.add('text-gray-400');
+                }
+            });
+
+            // Update custom textarea if needed
+            document.getElementById('custom-prompt').value = '';
+            runAiSimulation();
+        }
+
+        function runAiSimulation() {
+            const status = document.getElementById('pipeline-status');
+            const customVal = document.getElementById('custom-prompt').value.trim();
+
+            status.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang xử lý AI...`;
+            status.className = "text-xs font-semibold px-2.5 py-1 rounded-full bg-warmOrange/10 text-warmOrange";
+
+            setTimeout(() => {
+                if (customVal !== "") {
+                    document.getElementById('output-raw').innerText = `"${customVal}"`;
+                    document.getElementById('output-title').innerText = "Khóa học: Bài học Kinh nghiệm Sống Tự chọn";
+                    document.getElementById('output-points').innerHTML = `
+                        <li><strong>Bài học 1:</strong> Phân tích phản tư từ câu chuyện cá nhân.</li>
+                        <li><strong>Bài học 2:</strong> Ứng dụng bài học sư phạm vào thực tiễn Gen Z.</li>
+                    `;
+                    document.getElementById('audio-speaker').innerText = "Đại sứ Ký ức Tự chọn";
+                } else {
+                    const data = presets[selectedIndex];
+                    document.getElementById('output-raw').innerText = data.raw;
+                    document.getElementById('output-title').innerText = data.title;
+                    document.getElementById('output-points').innerHTML = data.points.map(p => `<li>${p}</li>`).join('');
+                    document.getElementById('audio-speaker').innerText = data.speaker;
+                }
+
+                status.innerHTML = `<i class="fa-solid fa-circle-check text-[10px] mr-1"></i> Hoàn thành`;
+                status.className = "text-xs font-semibold px-2.5 py-1 rounded-full bg-jadeGreenLight text-jadeGreen";
+            }, 500);
+        }
+
+        // Toggle Audio Player Simulation
+        let isPlaying = false;
+        function toggleAudioDemo() {
+            const playBtn = document.getElementById('audio-play-btn');
+            const audioProgress = document.getElementById('audio-progress');
+
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                audioProgress.style.width = '75%';
+            } else {
+                isPlaying = false;
+                playBtn.innerHTML = `<i class="fa-solid fa-play ml-0.5"></i>`;
+                audioProgress.style.width = '25%';
+            }
+        }
+
+        function playDemoAudio(title, speaker) {
+            document.getElementById('ai-demo').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('output-title').innerText = `Khóa học: ${title}`;
+            document.getElementById('audio-speaker').innerText = `Đại sứ: ${speaker}`;
+            if (!isPlaying) {
+                toggleAudioDemo();
+            }
+        }
+
+        // Switch Registration Form Tabs
+        function switchTab(role) {
+            const tabStudent = document.getElementById('tab-student');
+            const tabAmbassador = document.getElementById('tab-ambassador');
+            const selectLabel = document.getElementById('role-specific-label');
+            const selectBox = document.getElementById('role-specific-select');
+
+            if (role === 'student') {
+                tabStudent.className = "flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all bg-warmOrange text-white shadow-md";
+                tabAmbassador.className = "flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-600 hover:text-darkText";
+                selectLabel.innerText = "Nhu cầu đăng ký *";
+                selectBox.innerHTML = `
+                    <option value="course-11">Đăng ký Khóa học 1-1 / Nhóm nhỏ (Gen Z)</option>
+                    <option value="family-heritage">Đăng ký Gói Số hóa cho Ông bà/Cha mẹ</option>
+                    <option value="b2b">Tư vấn dự án cho Trường học/Doanh nghiệp</option>
+                `;
+            } else {
+                tabAmbassador.className = "flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all bg-jadeGreen text-white shadow-md";
+                tabStudent.className = "flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-600 hover:text-darkText";
+                selectLabel.innerText = "Mong muốn của Đại sứ *";
+                selectBox.innerHTML = `
+                    <option value="become-ambassador">Đăng ký trở thành Đại sứ Ký ức kể chuyện</option>
+                    <option value="digitize-memoir">Muốn số hóa hồi ký cá nhân/gia đình</option>
+                    <option value="community-volunteer">Tham gia hoạt động giao lưu học sinh/Gen Z</option>
+                `;
+            }
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            document.getElementById('registration-form').reset();
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
